@@ -1,0 +1,25 @@
+{
+  "name": "curso-node-integrado-2022",
+  "version": "1.0.0",
+  "description": "Projeto node apresentando funcionalidades do node e conceitos de api's rest",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsomariano/Curso-node-integrado-2022.git"
+  },
+  "keywords": [
+    "integrado"
+  ],
+  "author": "Junior Santos Oliveira Mariano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jsomariano/Curso-node-integrado-2022/issues"
+  },
+  "homepage": "https://github.com/jsomariano/Curso-node-integrado-2022#readme",
+  "dependencies": {
+    "express": "4.18.1"
+  }
+}
