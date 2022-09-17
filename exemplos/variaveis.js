@@ -40,17 +40,3 @@ const explicacao = `
 `
 
 console.log(explicacao)
-
-module.exports = {
-    minhaString,
-    meuNumero,
-    meuBoolean,
-    meuNull,
-    meuUndefined,
-    meuArray,
-    meuObjeto,
-    minhaFuncao,
-    minhaOutraFuncao,
-    minhaData,
-    minhaRegex,
-}
