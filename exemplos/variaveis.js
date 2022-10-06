@@ -1,6 +1,5 @@
-
-// Esses são os tipos primitivos 
-const minhaString = "";
+// Esses são os tipos primitivos
+const minhaString = '';
 const meuNumero = 1;
 const meuBoolean = true;
 const meuNull = null;
@@ -10,7 +9,7 @@ const meuUndefined = undefined;
 const meuArray = [];
 const meuObjeto = {};
 const minhaFuncao = () => { };
-function minhaOutraFuncao() { };
+function minhaOutraFuncao() { }
 const minhaData = new Date();
 const minhaRegex = new RegExp();
 
@@ -37,6 +36,6 @@ const explicacao = `
     - const, são imutaveis, não se pode mudar o valor delas e sempre devem ser iniciadas!
     - var, mutavel, e possui escopo global, e tem alguns comportamentos perigosos, exemplo: hoisting
     - let, assim como var e mutavel, porem tem escopo local, ha algumas melhorias em relacao ao var, logo e mais indicada!
-`
+`;
 
-console.log(explicacao)
+console.log(explicacao);

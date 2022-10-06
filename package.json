@@ -4,18 +4,22 @@
   "description": "Curso para aprender conceitos basicos de node",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon ./src/index.js",
-    "migrate:make": "NODE_ENV=development npx knex migrate:make",
-    "migrate:latest": "NODE_ENV=development npx knex migrate:latest",
-    "migrate:rollback": "NODE_ENV=development npx knex migrate:rollback"
+    "start": "nodemon ./src/index.js",
+    "migrate:make": "npx knex migrate:make",
+    "migrate:latest": "npx knex migrate:latest",
+    "migrate:rollback": "npx knex migrate:rollback"
   },
   "devDependencies": {
-    "knex": "2.3.0",
+    "eslint": "8.24.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.26.0",
     "nodemon": "2.0.20"
   },
   "dependencies": {
+    "bcrypt": "5.0.1",
     "better-sqlite3": "^7.6.2",
     "express": "4.18.1",
+    "knex": "2.3.0",
     "sqlite3": "5.1.1"
   },
   "repository": {
