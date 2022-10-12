@@ -1,6 +1,8 @@
-const express = require("./express")
-var port = 3000
+require('dotenv').config();
+const express = require('./express');
 
-express.listen(port)
+const port = 3000;
 
-console.log(`http://localhost:${port}/`)
+express.listen(port);
+
+console.log(`http://localhost:${port}/`);

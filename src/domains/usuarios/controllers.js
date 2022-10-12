@@ -1,8 +1,6 @@
-const express = require('express');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const knex = require('../../config/knex');
-
-const router = express.Router();
 
 function getUsuarioById(usuarioId) {
   return knex('usuarios')
@@ -24,11 +22,37 @@ async function formatValues(body) {
     nome,
     email,
     senha: senhaCriptografada,
-    data_nascimento: dataNascimento,
+    data_nascimento: new Date(dataNascimento).toISOString(),
   };
 }
 
-router.post('/cadastro', async (request, response) => {
+async function login(request, response) {
+  const { email, senha } = request.body;
+
+  const usuario = await knex('usuarios')
+    .where('email', email)
+    .first();
+
+  if (!bcrypt.compareSync(String(senha), usuario.senha)) {
+    return response
+      .status(403)
+      .send({
+        message: 'Usuário não existe ou a senha esta incorreta.',
+      });
+  }
+
+  const token = jwt.sign(usuario, process.env.JWT_SECRET_KEY);
+
+  delete usuario.senha;
+
+  return response
+    .json({
+      token,
+      usuario,
+    });
+}
+
+async function cadastraUsuario(request, response) {
   const valuesToInsert = await formatValues(request.body);
 
   const [usuarioCadastradoId] = await knex('usuarios')
@@ -36,10 +60,11 @@ router.post('/cadastro', async (request, response) => {
 
   const usuario = await getUsuarioById(usuarioCadastradoId);
 
-  response.send(usuario);
-});
+  return response
+    .send(usuario);
+}
 
-router.put('/:usuarioId/edicao', async (request, response) => {
+async function editaUsuario(request, response) {
   const {
     usuarioId,
   } = request.params;
@@ -52,29 +77,51 @@ router.put('/:usuarioId/edicao', async (request, response) => {
 
   const usuario = await getUsuarioById(usuarioEditadoId);
 
-  response.send(usuario);
-});
+  return response
+    .send(usuario);
+}
 
-router.get('/:usuarioId/consulta', async (request, response) => {
+async function consultaUsuario(request, response) {
   const {
     usuarioId,
   } = request.params;
 
   const usuario = await getUsuarioById(usuarioId);
 
-  response.json(usuario);
-});
+  return response
+    .json(usuario);
+}
 
-router.get('/listagem', async (request, response) => {
+async function listaUsuarios(request, response) {
   const usuarios = await knex('usuarios');
 
   response.json(usuarios);
-});
+}
 
-router.delete('/:usuarioId/delete', async (request, response) => {
-  const usuarios = await knex('usuarios').where('id', request.params.usuarioId).delete();
+async function excluiUsuario(request, response) {
+  const {
+    usuario,
+  } = request;
 
-  response.json(usuarios);
-});
+  const usuarioIdToRemove = Number(request.params.usuarioId);
 
-module.exports = router;
+  if (usuarioIdToRemove !== usuario.id) {
+    return response.status(401).json({ message: 'Você não possui permissao para excluir esse usuario' });
+  }
+
+  await knex('usuarios')
+    .where('id', request.params.usuarioId)
+    .delete();
+
+  return response
+    .sendStatus(204);
+}
+
+module.exports = {
+  excluiUsuario,
+  listaUsuarios,
+  consultaUsuario,
+  editaUsuario,
+  cadastraUsuario,
+  login,
+};
