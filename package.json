@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Curso para aprender conceitos basicos de node",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon ./src/index.js",
     "migrate:make": "npx knex migrate:make",

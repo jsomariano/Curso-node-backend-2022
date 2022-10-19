@@ -1,6 +1,6 @@
-const express = require('express');
-const authMiddleware = require('../../middlewares/auth');
-const controllers = require('./controllers');
+import express from 'express';
+import authMiddleware from '../../middlewares/auth.js';
+import controllers from './controllers.js';
 
 const router = express.Router();
 
@@ -11,4 +11,4 @@ router.get('/:usuarioId/consulta', authMiddleware, controllers.consultaUsuario);
 router.get('/listagem', authMiddleware, controllers.listaUsuarios);
 router.delete('/:usuarioId/delete', authMiddleware, controllers.excluiUsuario);
 
-module.exports = router;
+export default router;

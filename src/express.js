@@ -1,7 +1,6 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-
-const usuarios = require('./domains/usuarios/routes');
+import express from 'express';
+import bodyParser from 'body-parser';
+import usuarios from './domains/usuarios/routes.js';
 
 const app = express();
 
@@ -9,4 +8,4 @@ app.use(bodyParser.json());
 app.get('/', (request, response) => { response.send('Hello world!'); });
 app.use('/usuarios', usuarios);
 
-module.exports = app;
+export default app;

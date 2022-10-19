@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const knex = require('../../config/knex');
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
+import knex from 'knex'
 
 function getUsuarioById(usuarioId) {
   return knex('usuarios')
@@ -117,7 +117,7 @@ async function excluiUsuario(request, response) {
     .sendStatus(204);
 }
 
-module.exports = {
+export default {
   excluiUsuario,
   listaUsuarios,
   consultaUsuario,
