@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import knex from 'knex'
+import knex from '../../config/knex.js'
 
 function getUsuarioById(usuarioId) {
   return knex('usuarios')
@@ -33,7 +33,7 @@ async function login(request, response) {
     .where('email', email)
     .first();
 
-  if (!bcrypt.compareSync(String(senha), usuario.senha)) {
+  if (!usuario || !bcrypt.compareSync(String(senha), usuario.senha)) {
     return response
       .status(403)
       .send({

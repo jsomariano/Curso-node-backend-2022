@@ -1,11 +1,11 @@
-const path = require('path');
-// Update with your config settings.
+import path from 'path'
 
-module.exports = {
+export default {
   development: {
+    debug: true,
     client: 'better-sqlite3',
     connection: {
-      filename: path.join(__dirname, './database/database.sqlite3'),
+      filename: path.resolve('./database/database.sqlite3'),
     },
     migrations: {
       directory: './database/migrations',
