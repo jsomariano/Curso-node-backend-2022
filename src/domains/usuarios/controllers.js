@@ -16,7 +16,11 @@ async function formatValues(body) {
     data_nascimento: dataNascimento,
   } = body;
 
-  const senhaCriptografada = await bcrypt.hash(senha, 12);
+
+  let senhaCriptografada; 
+  if(senha) {
+     senhaCriptografada = await bcrypt.hash(senha, 12);
+  }
 
   return {
     nome,

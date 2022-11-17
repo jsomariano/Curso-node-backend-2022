@@ -6,7 +6,7 @@ function authMiddleware(request, response, next) {
   if (!token) {
     return response
       .status(401)
-      .send({ message: 'Não possou permissão para acessar este recurso.' });
+      .send({ message: 'Não possui permissão para acessar este recurso.' });
   }
 
   const tokenReplaced = token.replace('Bearer ', '');
